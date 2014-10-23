@@ -41,7 +41,7 @@ fetchpost = (dir, item, cb) ->
   (e,r,b) <- request {
     url: "https://tw.knowledge.yahoo.com/question/question?qid=#{item.qid}"
   }, _
-  if e or !b or /錯誤編號999/.exec(b) => return setTimeout (-> fetchlist dir,page,cb),parseInt(Math.random!*1000) + 2000
+  if e or !b or /錯誤編號999/.exec(b) => return setTimeout (-> fetchpost dir, item, cb),parseInt(Math.random!*1000) + 2000
   $ = cheerio.load b
   content = $('#ykpqc_bd .main div').text!
   postmanager.write item.qid, content
